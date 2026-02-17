@@ -34,7 +34,7 @@ let user = {
 // let age = user.age;
 
 //es6
-let { f_name, l_name, age1 } = user; // using object destructuring to extract properties into variables
+let { f_name, l_name, agee } = user; // using object destructuring to extract properties into variables
 
 //Spread operator
 let numbers1 = [1, 2, 3];
