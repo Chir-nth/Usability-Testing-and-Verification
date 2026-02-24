@@ -9,14 +9,16 @@ const Counter = () => {
     const [logs, setLogs] = useState([]);
     const [showLogs, setShowLogs] = useState(false);
 
-    const handleOperation = (e) => {
-        const value = +e.target.value;
-        const inputName = e.target.name;
-
-        if (e.target.id === "value_inc") {
-            setIncValue(value);
-        } else if (e.target.id === "value_dec") {
-            setDecValue(value);
+    const handleOperation = (event) => {
+        if (event.target.id === "value_inc") {
+            if (+event.target.value >= 0) {
+                setIncValue(+event.target.value);
+            }
+        } 
+        else if (event.target.id === "value_dec") {
+            if (+event.target.value >= 0) {
+                setDecValue(+event.target.value);
+            }
         }
     };
     
@@ -50,12 +52,12 @@ const Counter = () => {
     };
 
   return (
-    <div className="main">
+    <div className="main" data-testid="counter-component">
         <div>
             <h1>Counter</h1>
         </div>
         <div>
-            < h3>Value of Counter: {counter}</h3>
+            < h3 data-testid="counter-value">Value of Counter: {counter}</h3>
         </div>
         <div className="buttons">
           <div className="action_section">
@@ -64,13 +66,14 @@ const Counter = () => {
                         value={incValue} 
                         placeholder="0"
                         id="value_inc"
+                        data-testid="value_inc"
                         onChange={(e) => handleOperation(e)}
                     ></input>
                 </form>
                 <button 
-                    className="button button_inc"
+                    className="button button_inc" data-testid="increase-button"
                     onClick={() => handleCounter("+")}>
-                    Increse
+                    Increase
                 </button>
             </div>
             <div className="action_section">
@@ -79,6 +82,7 @@ const Counter = () => {
                         value={decValue} 
                         placeholder="0"
                         id="value_dec"
+                        data-testid="value_dec"
                         onChange={(e) => handleOperation(e)}
                     ></input>
                 </form>
@@ -90,7 +94,7 @@ const Counter = () => {
             </div>
         </div>
         {logs.length > 0 && (
-                <div className="logs">
+                <div className="logs" data-testid="logs-section">
                     <button 
                         className="button button_info" 
                         onClick={() => setShowLogs(!showLogs)}
