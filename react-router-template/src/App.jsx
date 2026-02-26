@@ -5,6 +5,7 @@ import Home from "./components/Home/Home.jsx";
 import About from "./components/About/About.jsx";
 import Button from "./components/Button/Button.jsx";
 import { useState } from "react";
+import Products from "./components/Products/Products.jsx";
  
 const App = () => {
     const [loggedIn, setLogIn] = useState(false);
@@ -39,11 +40,12 @@ const App = () => {
           displayFalse={"login"}
           handleLogin={handleLogin}
           />
-
       </nav>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        {loggedIn && <Route path="/products" 
+        element={<Products isUserLoggedIn={loggedIn} isLoading={loading} />} />}
       </Routes>
     </div>
   );
