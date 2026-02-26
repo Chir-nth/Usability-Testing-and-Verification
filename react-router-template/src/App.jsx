@@ -3,8 +3,22 @@ import "./App.css";
  
 import Home from "./components/Home/Home.jsx";
 import About from "./components/About/About.jsx";
+import Button from "./components/Button/Button.jsx";
+import { useState } from "react";
  
 const App = () => {
+    const [loggedIn, setLogIn] = useState(false);
+    const [loading, setLoading] = useState(false);
+
+    const handleLogin = () => {
+      setLoading(true);
+      //dummy call to handle login which takes 2 seconds to complete
+      setTimeout(() => {
+        setLogIn(!loggedIn);
+        setLoading(false);
+      }, 2000);
+    }
+
   return (
     <div data-testid="App" className="App">
       <nav data-testid="main_nav">
@@ -18,8 +32,15 @@ const App = () => {
         <NavLink data-testid="Product_Link" to="/products">
           Products
         </NavLink>
+          <Button 
+          value={loggedIn} 
+          isLoading={loading}
+          displayTrue={"logout"}
+          displayFalse={"login"}
+          handleLogin={handleLogin}
+          />
+
       </nav>
-     
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
