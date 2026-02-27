@@ -1,11 +1,13 @@
 import { NavLink, Route, Routes } from "react-router-dom";
-import "./App.css";
- 
+import "./App.css"; 
 import Home from "./components/Home/Home.jsx";
 import About from "./components/About/About.jsx";
 import Button from "./components/Button/Button.jsx";
 import { useState } from "react";
 import Products from "./components/Products/Products.jsx";
+import ProductDetails from "./components/ProductDetails/ProductDetails.jsx";
+import Offers from "./components/About/Offers/Offers.jsx";
+import Info from "./components/About/Info/Info.jsx";
  
 const App = () => {
     const [loggedIn, setLogIn] = useState(false);
@@ -43,9 +45,19 @@ const App = () => {
       </nav>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        {loggedIn && <Route path="/products" 
-        element={<Products isUserLoggedIn={loggedIn} isLoading={loading} />} />}
+        <Route path="/about" element={<About />} > 
+          <Route path="info" element={<Info />} />
+          <Route path="offers" element={<Offers />} > 
+            <Route path=":id/:type" element={<ProductDetails />} />
+          </Route>
+        </Route>
+        <Route 
+          path="/products" 
+          element={<Products isUserLoggedIn={loggedIn} isLoading={loading} />} />
+          {loggedIn && (
+            <Route path="/products/:id/:type" element={<ProductDetails />} />
+          )}
+          <Route path="*" element={<h3 className="error">Route Not Found</h3>} />
       </Routes>
     </div>
   );

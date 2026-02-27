@@ -2,6 +2,7 @@ import Loader from "../Loader/Loader";
 import "./Products.css";
 import { useEffect, useState } from "react";
 import { BASE_URL } from "../../const";
+import { Link } from "react-router-dom";
 
 const Products = ({ isUserLoggedIn, isLoading }) => {
 const [products, setProducts] = useState([]);
@@ -29,8 +30,10 @@ const [products, setProducts] = useState([]);
           <div className="products">
             {products?.Hoodies?.map((p) => (
                 <div key={p.id}>
-                  <img src={p.image} alt="product" />
-                  <p style={{ textAlign: "center"}}>{p.name}</p>
+                  <Link to={`/products/${p.id}/Hoodies`}>
+                    <img src={p.image} alt="product" />
+                  </Link>
+                    <p style={{ textAlign: "center"}}>{p.name}</p>
                 </div>
               ))}          
           </div>
@@ -38,7 +41,9 @@ const [products, setProducts] = useState([]);
           <div className="products">
             {products?.Tees?.map((p) => (
                 <div key={p.id}>
-                  <img src={p.image} alt="product" />
+                  <Link to={`/products/${p.id}/Tees`}>
+                    <img src={p.image} alt="product" />
+                  </Link>
                   <p style={{ textAlign: "center" }}>{p.name}</p>
                 </div>
               ))}          
@@ -47,7 +52,9 @@ const [products, setProducts] = useState([]);
           <div className="products">
             {products?.Sneakers?.map((p) => (
                 <div key={p.id}>
-                  <img src={p.image} alt="product" />
+                  <Link to={`/products/${p.id}/Sneakers`}>
+                    <img src={p.image} alt="product" />
+                  </Link>
                   <p style={{ textAlign: "center" }}>{p.name}</p>
                 </div>
               ))}          
