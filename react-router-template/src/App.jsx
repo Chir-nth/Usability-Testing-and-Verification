@@ -1,4 +1,4 @@
-import { NavLink, Route, Routes } from "react-router-dom";
+import { NavLink, Route, Routes, Navigate} from "react-router-dom";
 import "./App.css"; 
 import Home from "./components/Home/Home.jsx";
 import About from "./components/About/About.jsx";
@@ -46,6 +46,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} > 
+          <Route index element={<Navigate to="info" />} />
           <Route path="info" element={<Info />} />
           <Route path="offers" element={<Offers />} > 
             <Route path=":id/:type" element={<ProductDetails />} />
