@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import "./style.scss";
@@ -13,6 +13,15 @@ const SearchResult = () => {
   const [loading, setLoading] = useState(false);
   const { query } = useParams();
 
+
+    //Function which calls the movie - Batman
+    const fetchMovies = () => {
+
+
+    }
+    useEffect(() => {
+      fetchMovies();
+    }, [query]);
   return (
     <div className="searchResultsPage">
       {loading && <Spinner initial={true} />}

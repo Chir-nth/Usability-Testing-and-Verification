@@ -7,8 +7,29 @@ import Details from "./pages/details/Details";
 import SearchResult from "./pages/searchResult/SearchResult";
 import Explore from "./pages/explore/Explore";
 import PageNotFound from "./pages/404/PageNotFound";
+import { useEffect } from "react";
+import { fetchDataFromApi } from "./utils/api";
+import { setApiConfigration } from "./store/homeSlice";
+import { useDispatch } from "react-redux";
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    fetchApiConfig();
+  }, []);
+
+  const fetchApiConfig = () =>{
+    fetchDataFromApi("/configuration").then((res) => {
+      const url ={
+        backdrop: res.images.secure_base_url +"original",
+        poster: res.images.secure_base_url +"original",
+        profile: res.images.secure_base_url +"original",
+
+      };
+       //Write this information back to my redux store
+       dispatch(setApiConfigration(url));
+    });
+  };
   return (
     <BrowserRouter>
       <Header />
